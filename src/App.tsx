@@ -1,15 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {NavLink, Outlet, Route, Routes, useParams} from "react-router-dom";
+import {
+  Navigate,
+  NavLink,
+  Outlet,
+  Route,
+  Routes,
+  useNavigate,
+  useParams
+} from "react-router-dom";
 
 const Profile = () => {
-  const params = useParams<'*'>();
-  const some = params["*"];
-  console.log(some);
+  // const params = useParams<'*'>();
+  // const some = params["*"];
+  // console.log(some);
+
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (true) navigate('/login')
+  // }, []);
 
   return (
-    <div>profile</div>
+    <div>
+      profile
+      <button onClick={() => {
+        navigate(-1)
+      }}>logout</button>
+    </div>
   )
 }
 
@@ -46,7 +65,8 @@ function App() {
         <Route path={'/*'} element={<div>404</div>}/>
         <Route path={'/'} element={<div>main</div>}/>
         <Route path={'/login'} element={<div>login</div>}/>
-        <Route path={'/profile/'} element={<div>profile</div>}/>
+        {/*<Route path={'/profile/'} element={<div>profile</div>}/>*/}
+        <Route path={'/profile/'} element={<Profile/>}/>
         <Route path={'/profile/settings'} element={<div>settings</div>}/>
       </Routes>
     </div>
