@@ -8,7 +8,7 @@ import {
   Route,
   Routes,
   useNavigate,
-  useParams
+  useParams, useSearchParams
 } from "react-router-dom";
 
 const Profile = () => {
@@ -16,18 +16,28 @@ const Profile = () => {
   // const some = params["*"];
   // console.log(some);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // useEffect(() => {
   //   if (true) navigate('/login')
   // }, []);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  console.log(searchParams.get('name'));
+  console.log(Object.fromEntries(searchParams));
+
+  useEffect(() => {
+    console.log('research...')
+  }, [searchParams]);
+
   return (
     <div>
       profile
-      <button onClick={() => {
-        navigate(-1)
-      }}>logout</button>
+      {/*<button onClick={() => {*/}
+      {/*  navigate(-1)*/}
+      {/*}}>logout</button>*/}
+      <button onClick={() => {setSearchParams({...Object.fromEntries(searchParams), age: '32'})}}>add age</button>
     </div>
   )
 }
